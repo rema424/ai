@@ -8,7 +8,7 @@ Use this reference when one session must cover more than one upstream phase, suc
 - Prefer small experiments over speculative precision.
 - Move backward when evidence changes the premise.
 - Keep phase artifacts traceable to facts, assumptions, decisions, and open questions.
-- Checkpoint after meaningful phase baselines and after evidence changes direction.
+- Checkpoint after meaningful phase baselines, validation artifacts, revisions, review boundaries, and evidence changes in direction.
 - Continue while local, non-destructive work can materially improve the objective.
 - Do not use handoff as the first exit when validation or revision can still be done locally.
 
@@ -17,6 +17,8 @@ Use this reference when one session must cover more than one upstream phase, suc
 Run the phases below as a loop. After each artifact, update the uncertainty frontier and choose the next executable action. Re-enter earlier phases whenever evidence changes the plan, requirements, or design.
 
 Before stopping, verify that the objective is achieved or that the next necessary step truly requires external authority, unavailable data, destructive action, or production impact.
+
+When the active checkpoint policy is `auto-commit with limits`, create frequent small commits as phase artifacts land. Do not wait until the full mission or full phase sequence is complete.
 
 ### 1. Research Baseline
 

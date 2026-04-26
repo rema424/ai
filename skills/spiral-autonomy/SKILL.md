@@ -60,6 +60,7 @@ Then build a compact working frame:
 - Evidence threshold
 - Stop only when
 - Checkpoint policy
+- Checkpoint trigger
 
 If working in a repository, inspect local operating assets first: `AGENTS.md`, `.codex/`, README, CI/workflows, package manifests, task runners, and relevant docs. Prefer repo instructions over generic defaults.
 
@@ -96,7 +97,7 @@ Each loop:
 5. Extract learning.
 6. Update upstream artifacts: objective, requirements, design, plan, acceptance criteria, or task split.
 7. Update the executable action queue and uncertainty frontier.
-8. Decide whether to place a checkpoint.
+8. Place a checkpoint when the checkpoint trigger is met.
 9. Apply the continue gate before any final response.
 
 Prefer evidence over momentum. If implementation reveals the premise is wrong, revise requirements or design before continuing implementation.
@@ -145,25 +146,35 @@ Default checkpoint policy:
 
 State the chosen checkpoint policy once near the start. Do not make the user repeat checkpoint instructions in the prompt.
 
-Consider a checkpoint when:
+Under `auto-commit with limits`, checkpointing means actually creating git commits throughout the work. Prefer frequent small checkpoints over large end-of-session commits so progress can be resumed, reviewed, or rolled back by learning step. Do not silently downgrade to `recommend-only` because committing is inconvenient, because a sandbox requires escalation, or because the user did not repeat commit instructions.
 
-- A cycle changes requirements, design, scope, or risk understanding.
-- A coherent artifact is completed.
-- A patch is working and verified before a riskier next step.
-- A review finds material issues that should be preserved.
+Checkpoint trigger:
+
+- A mission loop changes requirements, design, scope, or risk understanding.
+- A coherent artifact is completed or substantially revised.
+- A research baseline, evidence table, model, schema, fixture, sample output, requirements pass, design pass, validation artifact, spike result, review, or upstream revision is completed.
+- A patch is working and verified, before starting the next distinct patch or riskier step.
+- A delegated result has been integrated and changes the plan, requirements, design, code, tests, or risk register.
+- A review finds material issues or confirms a meaningful acceptance boundary.
+- Work has been running long enough that another loss of local state would be costly, even if the mission is not done.
 - Human approval or handoff is needed.
+- The final response would otherwise leave relevant task changes uncommitted.
 
 When using git commits:
 
-- Do not ask for every checkpoint commit under `auto-commit with limits`; commit at meaningful cycle boundaries and report the list at the end.
+- Before editing, inspect `git status --short` so unrelated user changes are known.
+- Before each checkpoint, inspect `git status --short` and stage only files changed for the current task.
+- Do not ask for every checkpoint commit under `auto-commit with limits`; commit whenever a checkpoint trigger fires and report the list at the end.
 - Ask before the first checkpoint commit only when the policy is not already `auto-commit with limits`.
-- Keep one checkpoint to one logical change.
+- Keep one checkpoint to one logical change. If one loop produced multiple independent artifacts or patches, split them into separate commits.
 - Do not use `git add .`; stage only relevant files.
 - Do not commit unrelated user changes.
 - Use the repo's commit convention; otherwise prefer Conventional Commits.
 - Include evidence in the message when useful: cycle purpose, verification, and issue/reference.
 - Pause before committing if the commit would include secrets, credentials, destructive operations, production-impacting changes, or unrelated dirty worktree changes.
 - If the worktree is already dirty, inspect it before starting and keep checkpoint commits limited to files changed for the current task.
+- If the environment requires approval or elevated permissions for `git add` or `git commit`, request that approval through the available tool and continue the checkpoint. Treat denied approval as a blocked checkpoint and report it explicitly.
+- Before final response under `auto-commit with limits`, run a final dirty-worktree check. If relevant task changes remain and no stop condition blocks committing, create the checkpoint commit before responding.
 
 Do not create noisy checkpoints for every minor edit. If no durable artifact changed, summarize the learning log instead.
 
