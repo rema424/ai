@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spiral Autonomy"
+  short_description: "Guide spiral autonomous workflows"
+  default_prompt: "Use $spiral-autonomy to run this as a multi-phase, hypothesis-driven spiral process with spike validation, upstream revision, verification, and default checkpoint policy."
