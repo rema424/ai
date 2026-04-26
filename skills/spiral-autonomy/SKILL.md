@@ -10,6 +10,10 @@ license: MIT
 
 Run the task as a spiral process: treat the initial request as a provisional hypothesis, increase resolution through investigation or execution, and revise upstream assumptions when evidence changes.
 
+Default to mission-driven autonomy. When this skill is selected, the primary job is to keep working toward the user's objective until the objective is achieved or a real stop condition is reached. Do not treat a first analysis pass, planning document, handoff, or next-steps list as completion when useful local work remains.
+
+Shorten the work only when the user explicitly narrows the request, for example "light pass", "one cycle", "plan only", "research only", "do not implement", or a similarly clear limit. Otherwise, ambiguous or high-level goals should be decomposed into an executable queue and advanced autonomously.
+
 Use a thin profile for the task type. If the user names a profile, use it. Otherwise infer one from the request. Switch profiles during the work when learning changes the needed phase.
 
 - `research`: facts, sources, claims, uncertainty, implications.
@@ -24,20 +28,36 @@ For profile-specific output shapes, read `references/profiles.md` only when need
 
 For requests that span discovery through planning, requirements, design, spike validation, and revision in one session, run a multi-phase spiral. Read `references/multi-phase.md` when the task asks for end-to-end autonomous execution, "from research to design", concept-to-design, product discovery, or spike-driven validation.
 
+## Default Mission Mode
+
+Use mission mode by default:
+
+- Make objective completion the governing criterion, not cycle count.
+- Maintain the current uncertainty frontier: the assumptions, missing evidence, weak designs, untested workflows, or quality risks that most threaten the objective.
+- Maintain an executable action queue. When an action completes, add the next useful local action if it can improve the result.
+- Prefer durable artifacts over discussion-only progress: source notes, models, schemas, examples, prototypes, tests, reviews, decision records, or upstream revisions.
+- Before handing off, perform the strongest practical validation available within local authority.
+- Treat handoff as an artifact for real external dependency or human authority, not the default exit.
+
+For broad goals such as maturing a business plan, reaching a market-winning design, autonomous development, end-to-end discovery, or high-agency planning, continue through research, artifact creation, validation, critique, and revision until local non-destructive work is exhausted.
+
 ## Start
 
 Begin by stating the user's objective and the first move in one or two sentences.
 
 Then build a compact working frame:
 
-- Provisional objective
+- Mission objective
+- Definition of done
 - Known facts
 - Assumptions
 - Open questions
 - Current profile
 - Phase sequence, if multi-phase
-- First cycle goal
-- Completion criteria
+- Current uncertainty frontier
+- Executable action queue
+- Evidence threshold
+- Stop only when
 - Checkpoint policy
 
 If working in a repository, inspect local operating assets first: `AGENTS.md`, `.codex/`, README, CI/workflows, package manifests, task runners, and relevant docs. Prefer repo instructions over generic defaults.
@@ -45,6 +65,8 @@ If working in a repository, inspect local operating assets first: `AGENTS.md`, `
 ## Delegation
 
 Use subagents only when the user explicitly permits subagents, delegation, or parallel agent work.
+
+Mission mode does not depend on subagents. If delegation is unavailable or not permitted by the execution environment, continue autonomously as a single agent using the same executable queue.
 
 When delegating:
 
@@ -55,14 +77,15 @@ When delegating:
 - Tell workers they are not alone in the codebase and must not revert others' changes.
 - Separate implementation and review when practical.
 - Do not use subagents as generic search engines.
+- Keep a queue of delegated work when long-running parallel execution is permitted. When a subagent completes, integrate the result, update the uncertainty frontier, and assign the next bounded concrete task if one remains.
 
 Good delegated outputs include: evidence table, design option with tradeoffs, scoped patch, test result analysis, risk review, acceptance criteria critique, or market hypothesis critique.
 
 ## Spiral Cycle
 
-Run one or more cycles. Keep cycles small enough that learning can change direction before large sunk cost accumulates.
+Run mission loops until the objective is achieved or a real stop condition is reached. Keep each loop small enough that learning can change direction before large sunk cost accumulates, but do not stop merely because one coherent loop completed.
 
-Each cycle:
+Each loop:
 
 1. State the hypothesis or question.
 2. Gather only the context needed for the next decision.
@@ -70,16 +93,28 @@ Each cycle:
 4. Verify using the strongest practical method for the profile.
 5. Extract learning.
 6. Update upstream artifacts: objective, requirements, design, plan, acceptance criteria, or task split.
-7. Decide whether to continue, stop, or ask for human judgment.
+7. Update the executable action queue and uncertainty frontier.
 8. Decide whether to place a checkpoint.
+9. Apply the continue gate before any final response.
 
 Prefer evidence over momentum. If implementation reveals the premise is wrong, revise requirements or design before continuing implementation.
+
+## Continue Gate
+
+Before final response, check:
+
+- Is the mission objective achieved according to the definition of done?
+- Is there a useful local, non-destructive next action available without human authority?
+- Would that action reduce a major uncertainty, improve design maturity, improve business viability, improve implementation quality, or strengthen verification?
+- Can it produce or update a durable artifact such as a source note, schema, model, fixture, sample output, spike, test, critique, decision record, or upstream revision?
+
+If the objective is not achieved and the remaining action answers yes to the last three questions, continue instead of finalizing. Ask for human judgment only when the next necessary step truly requires external authority, unavailable data, destructive action, production impact, or a business/legal/security/product decision.
 
 ## Multi-Phase Work
 
 When the user's goal spans multiple upstream phases, do not force a linear waterfall. Treat each phase output as a provisional artifact that can be revised by later evidence.
 
-Default phase sequence:
+Default mission loop:
 
 1. Research: establish facts, constraints, and uncertainty.
 2. Product or business planning: frame value, users/customers, scope, and strategy.
@@ -87,11 +122,14 @@ Default phase sequence:
 4. Design: evaluate alternatives and choose a coherent approach.
 5. Spike validation: run the smallest practical experiment, prototype, code spike, benchmark, model, or source check that can reduce the highest-risk uncertainty.
 6. Revision: update research conclusions, plan, requirements, and design based on spike evidence.
-7. Handoff: produce the next executable plan or decision package.
+7. Review: critique the result against the mission objective and evidence threshold.
+8. Continue or handoff: continue when local work remains; hand off only when a real stop condition is reached.
 
 Move backward whenever later evidence invalidates earlier assumptions. Record what changed and why. Do not preserve an earlier plan merely for consistency.
 
 Use spikes for high-risk assumptions, unclear feasibility, unknown integration behavior, UX/workflow ambiguity, performance uncertainty, data availability, cost assumptions, market/channel assumptions, or requirements that are difficult to make testable.
+
+For multi-phase mission work, create at least one concrete validation artifact before handoff unless blocked by a real stop condition. Examples include a fixture or sample output, schema draft, pricing model, competitive matrix, worked example, prototype, benchmark, interview script with scoring rubric, or risk test. After creating the validation artifact, revise upstream artifacts based on what it showed.
 
 ## Checkpoints
 
@@ -162,10 +200,12 @@ If verification is not possible, state what was not verified and why. Do not pre
 
 Stop and surface the issue when:
 
-- A decision requires business, legal, security, budget, or product authority.
+- The next necessary decision requires business, legal, security, budget, or product authority, and no useful validation preparation remains.
 - The next step would be destructive or affect production without approval.
 - Evidence contradicts the initial goal enough that continuing would likely waste effort.
 - Two similar failures occur; summarize the cause and propose a harness improvement such as AGENTS.md, workflow, template, test, or skill update.
+
+Do not stop only because a human will eventually make a decision. First complete any local preparation that can improve that decision, such as hypothesis comparison, numeric modeling, evidence collection, validation design, questionnaire creation, fixture/schema/example creation, or risk review.
 
 ## Final Response
 
@@ -177,5 +217,6 @@ Keep the final response short and outcome-oriented. Include:
 - Verification performed.
 - Verification not performed, if any.
 - Remaining risks or human decisions.
+- Why stopping is valid under mission mode.
 
 For review tasks, findings come first.

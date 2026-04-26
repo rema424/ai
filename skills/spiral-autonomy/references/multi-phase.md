@@ -1,6 +1,6 @@
 # Multi-Phase Spiral
 
-Use this reference when one session must cover more than one upstream phase, such as research -> planning -> requirements -> design -> spike -> revision.
+Use this reference when one session must cover more than one upstream phase, such as research -> planning -> requirements -> design -> spike -> revision. Multi-phase work is a mission loop, not a checklist to complete once.
 
 ## Principles
 
@@ -9,8 +9,14 @@ Use this reference when one session must cover more than one upstream phase, suc
 - Move backward when evidence changes the premise.
 - Keep phase artifacts traceable to facts, assumptions, decisions, and open questions.
 - Checkpoint after meaningful phase baselines and after evidence changes direction.
+- Continue while local, non-destructive work can materially improve the objective.
+- Do not use handoff as the first exit when validation or revision can still be done locally.
 
-## Default Flow
+## Mission Loop
+
+Run the phases below as a loop. After each artifact, update the uncertainty frontier and choose the next executable action. Re-enter earlier phases whenever evidence changes the plan, requirements, or design.
+
+Before stopping, verify that the objective is achieved or that the next necessary step truly requires external authority, unavailable data, destructive action, or production impact.
 
 ### 1. Research Baseline
 
@@ -26,7 +32,7 @@ Outputs:
 - Highest-risk assumptions
 - Evidence quality
 
-Exit when there is enough evidence to frame a provisional plan, not when everything is known.
+Move forward when there is enough evidence to frame a provisional plan, not when everything is known. Keep unresolved high-risk assumptions in the action queue.
 
 ### 2. Planning Baseline
 
@@ -44,7 +50,7 @@ Outputs:
 - Strategy or release sequence
 - Assumptions that must be tested
 
-Exit when there is a clear enough direction to define requirements.
+Move forward when there is a clear enough direction to define requirements. Keep value, GTM, economics, and channel assumptions queued for validation.
 
 ### 3. Requirements Baseline
 
@@ -61,7 +67,7 @@ Outputs:
 - Edge cases
 - Open questions
 
-Exit when requirements are testable enough to evaluate designs.
+Move forward when requirements are testable enough to evaluate designs. Keep weak or untestable requirements queued for revision.
 
 ### 4. Design Baseline
 
@@ -79,7 +85,7 @@ Outputs:
 - Test strategy
 - Hard-to-reverse decisions
 
-Exit when the largest unresolved risk is identified.
+Move forward when the largest unresolved risk is identified. The next action should usually validate that risk.
 
 ### 5. Spike Validation
 
@@ -96,6 +102,12 @@ Spike forms:
 - Pricing/unit economics model
 - Market/channel evidence check
 - Policy/legal feasibility check
+- Fixture or sample output
+- Schema draft
+- Competitive matrix
+- Worked example
+- Interview script with scoring rubric
+- Risk test
 
 Spike rules:
 
@@ -104,6 +116,7 @@ Spike rules:
 - Keep the spike isolated unless the user asks to productionize it.
 - Prefer deleting or quarantining throwaway code after extracting learning.
 - If keeping spike artifacts, label them clearly and do not mix them with production implementation.
+- For mission-mode multi-phase work, create at least one concrete validation artifact before handoff unless blocked by a real stop condition.
 
 Spike output:
 
@@ -134,9 +147,22 @@ Explicitly list:
 - Rejected assumptions
 - New open questions
 
-### 7. Handoff
+### 7. Review And Continue Gate
 
-Goal: leave an executable next step.
+Goal: decide whether the mission should continue locally.
+
+Check:
+
+- Whether the objective is achieved against the definition of done.
+- Whether a local, non-destructive next action can improve evidence, design maturity, business viability, implementation quality, or verification.
+- Whether that action can produce a durable artifact or upstream revision.
+- Whether any stop condition is real rather than a generic future need for human judgment.
+
+If useful local work remains, continue the loop instead of handing off.
+
+### 8. Handoff
+
+Goal: leave an executable next step only when the mission is complete enough for the current authority or when a real stop condition blocks further local progress.
 
 Outputs:
 
@@ -146,6 +172,7 @@ Outputs:
 - Remaining risks
 - Next cycle recommendation
 - Human decisions required
+- Why stopping is valid under mission mode
 
 ## Profile Switching
 
