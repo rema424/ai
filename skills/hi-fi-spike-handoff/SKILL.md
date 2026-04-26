@@ -1,6 +1,7 @@
 ---
 name: hi-fi-spike-handoff
 description: Use after a branch has been reclassified as a Hi-Fi Spike. Extracts lessons, test intent, failure patterns, design constraints, minimal whiteboard design, and creates a handoff document for autonomous clean-room production implementation from a base branch.
+license: MIT
 ---
 
 # Hi-Fi Spike Handoff

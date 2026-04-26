@@ -1,6 +1,7 @@
 ---
 name: spiral-autonomy
 description: Use when Codex should run a learning-driven spiral process for ambiguous or evolving work across research, business planning, product planning, requirements, design, implementation, testing, or review. Triggers include requests for autonomous execution, high-agency planning, iterative discovery, hypothesis-driven work, upstream revision after implementation findings, subagent coordination, or maximizing learning from investigation/prototyping.
+license: MIT
 ---
 
 # Spiral Autonomy

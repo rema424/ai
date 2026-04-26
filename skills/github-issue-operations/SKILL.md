@@ -1,6 +1,7 @@
 ---
 name: github-issue-operations
 description: "Use when operating GitHub Issues across repositories with `gh` or a GitHub MCP server. Covers issue create/edit/view/close, label inspection, bulk issue workflows, sub-issue linking, `gh api` payload typing, issue number vs REST id, auth checks, and restart-safe recovery after partial failures."
+license: MIT
 ---
 
 # GitHub Issue Operations

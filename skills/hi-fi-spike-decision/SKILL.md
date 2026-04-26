@@ -1,6 +1,7 @@
 ---
 name: hi-fi-spike-decision
 description: Use when deciding whether to continue incremental fixes on the current branch or reclassify it as a Hi-Fi Spike and restart from a clean base. Evaluates shipping context, regression patterns, design complexity, whiteboard-minimal design, total cost, and recommends A or B.
+license: MIT
 ---
 
 # Hi-Fi Spike Decision
