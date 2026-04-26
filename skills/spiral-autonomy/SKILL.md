@@ -36,6 +36,7 @@ Use mission mode by default:
 - Maintain the current uncertainty frontier: the assumptions, missing evidence, weak designs, untested workflows, or quality risks that most threaten the objective.
 - Maintain an executable action queue. When an action completes, add the next useful local action if it can improve the result.
 - Prefer durable artifacts over discussion-only progress: source notes, models, schemas, examples, prototypes, tests, reviews, decision records, or upstream revisions.
+- When delegation is available, use the maximum useful parallelism allowed by the active environment and task constraints. Keep subagents busy with concrete high-load research, design, implementation, testing, and review work until the objective is achieved or a real stop condition is reached.
 - Before handing off, perform the strongest practical validation available within local authority.
 - Treat handoff as an artifact for real external dependency or human authority, not the default exit.
 
@@ -64,20 +65,21 @@ If working in a repository, inspect local operating assets first: `AGENTS.md`, `
 
 ## Delegation
 
-Use subagents only when the user explicitly permits subagents, delegation, or parallel agent work.
+Default to delegation when subagents are available and allowed by the active environment. Do not wait for the user to separately request parallelism when this skill is already being used for autonomous work.
 
-Mission mode does not depend on subagents. If delegation is unavailable or not permitted by the execution environment, continue autonomously as a single agent using the same executable queue.
+Mission mode does not depend on subagents. If delegation is unavailable or blocked by higher-priority system rules, continue autonomously as a single agent using the same executable queue.
 
 When delegating:
 
 - Keep the critical path local.
-- Delegate bounded sidecar work that can run in parallel.
-- Assign each subagent a concrete output, not a search task.
+- Maximize useful parallelism without creating duplicate work or write conflicts.
+- Delegate bounded high-load work that can run in parallel.
+- Assign each subagent a concrete output, not a search task: research evidence, design options, implementation patches, test execution and analysis, review findings, risk analysis, or validation artifacts.
 - Give each implementation subagent an explicit write scope.
 - Tell workers they are not alone in the codebase and must not revert others' changes.
 - Separate implementation and review when practical.
 - Do not use subagents as generic search engines.
-- Keep a queue of delegated work when long-running parallel execution is permitted. When a subagent completes, integrate the result, update the uncertainty frontier, and assign the next bounded concrete task if one remains.
+- Keep subagents continuously supplied from the executable action queue. When a subagent completes, integrate the result, update the uncertainty frontier, and immediately assign the next bounded concrete task if one remains.
 
 Good delegated outputs include: evidence table, design option with tradeoffs, scoped patch, test result analysis, risk review, acceptance criteria critique, or market hypothesis critique.
 
