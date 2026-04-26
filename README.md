@@ -20,3 +20,11 @@ gh skill install rema424/ai github-issue-operations --agent codex
 ```
 
 Replace `github-issue-operations` with the skill name you want to install.
+
+## APM
+
+This repository can also be packed as an APM plugin:
+
+```sh
+apm pack --format plugin
+```

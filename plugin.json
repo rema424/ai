@@ -1,0 +1,9 @@
+{
+  "name": "rema424-ai",
+  "version": "0.1.0",
+  "description": "Agent skills and tooling shared by rema424.",
+  "author": {
+    "name": "rema424"
+  },
+  "license": "MIT"
+}
