@@ -13,13 +13,15 @@ This repository currently publishes these Codex skills:
 
 ## Install
 
-Install a skill with GitHub CLI:
+Install skills interactively with GitHub CLI:
 
 ```sh
-gh skill install rema424/ai github-issue-operations --agent codex
+gh skill install rema424/ai --agent codex --scope user
 ```
 
-Replace `github-issue-operations` with the skill name you want to install.
+This opens an interactive selector for the skills in this repository.
+Use `--agent codex` to install for Codex, and `--scope user` to make the
+installed skills available across repositories.
 
 ## APM
 
