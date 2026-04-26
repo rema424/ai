@@ -18,7 +18,7 @@ Project-level config:
 
 Project-level config is loaded only for trusted projects.
 
-Recommended user-level configuration:
+Recommended user-level configuration. Place this top-level key before any TOML table header such as `[projects "..."]` or `[tui.model_availability_nux]`:
 
 ```toml
 developer_instructions = """
@@ -41,4 +41,4 @@ To install the recommended user-level config automatically, run:
 scripts/install-config
 ```
 
-The script appends the block only when it is not already present. If `developer_instructions` already exists with different content, the script leaves the file unchanged and asks you to merge manually.
+The script installs the block as a top-level key before any TOML table header. If an older run placed this same block under a table, the script repairs it. If `developer_instructions` already exists with different content, the script leaves the file unchanged and asks you to merge manually.
