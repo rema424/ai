@@ -23,6 +23,19 @@ This opens an interactive selector for the skills in this repository.
 Use `--agent codex` to install for Codex, and `--scope user` to make the
 installed skills available across repositories.
 
+## Setup
+
+For `$spiral-autonomy`, install the recommended Codex `developer_instructions`
+so invoking the skill counts as authorization for subagents, delegation, and
+parallel agent work:
+
+```sh
+scripts/install-config
+```
+
+See [docs/setup.md](docs/setup.md) for the exact config block and manual setup
+instructions. Restart Codex after changing config.
+
 ## APM
 
 This repository can also be packed as an APM plugin:
